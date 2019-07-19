@@ -81,6 +81,8 @@ namespace SelectionPrint
             }
             else {
                 fitToPageRadioButton.Checked = true;
+                zoomPercentNumericUpDown.Hide();
+                label8.Hide();
             }
             this.zoomRadioButton.CheckedChanged += new System.EventHandler(this.zoomRadioButton_CheckedChanged);
             this.fitToPageRadioButton.CheckedChanged += new System.EventHandler(this.fitToPageRadioButton_CheckedChanged);
@@ -313,6 +315,8 @@ namespace SelectionPrint
         private void zoomRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (zoomRadioButton.Checked) {
+                zoomPercentNumericUpDown.Show();
+                label8.Show();
                 m_printSetup.ZoomType = ZoomType.Zoom;
                 offsetRadioButton.Checked = true;
                 m_printSetup.Zoom = (int)zoomPercentNumericUpDown.Value;
@@ -320,6 +324,10 @@ namespace SelectionPrint
                 if (!revertButton.Enabled) {
                     revertButton.Enabled = true;
                 }
+            }
+            else {
+                zoomPercentNumericUpDown.Hide();
+                label8.Hide();
             }
         }
 
@@ -427,16 +435,22 @@ namespace SelectionPrint
 
         private void saveAsButton_Click(object sender, EventArgs e)
         {
+            bool isSuccess = false;
+            string newName = string.Empty;
             using (SaveAsForm dlg = new SaveAsForm(m_printSetup)) {
                 dlg.ShowDialog();
+                isSuccess = dlg.SaveAsSuccess;
+                newName = dlg.NewName;
             }
 
             m_stopUpdateFlag = true;
             printSetupsComboBox.DataSource = m_printSetup.PrintSettingNames;
             printSetupsComboBox.Update();
             m_stopUpdateFlag = false;
-
-            printSetupsComboBox.SelectedItem = m_printSetup.SettingName;
+            if (isSuccess) {
+                printSetupsComboBox.SelectedItem = newName;
+            }
+            //printSetupsComboBox.SelectedItem = m_printSetup.SettingName;
         }
 
         private void renameButton_Click(object sender, EventArgs e)
@@ -455,8 +469,8 @@ namespace SelectionPrint
 
         private void revertButton_Click(object sender, EventArgs e)
         {
-            //m_printSetup.Revert();
-
+            m_printSetup.Revert();
+            m_printSetup.SettingName = ConstData.InSessionName;
             printSetupsComboBox_SelectedValueChanged(null, null);
         }
 
@@ -469,7 +483,7 @@ namespace SelectionPrint
             printSetupsComboBox.Update();
             m_stopUpdateFlag = false;
 
-            printSetupsComboBox.SelectedItem = m_printSetup.SettingName;
+            printSetupsComboBox.SelectedItem = "<In-Session>";
         }
     }
 }

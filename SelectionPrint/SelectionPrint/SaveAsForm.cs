@@ -12,6 +12,9 @@ namespace SelectionPrint
 {
     public partial class SaveAsForm : System.Windows.Forms.Form
     {
+        public bool SaveAsSuccess { get; set; }
+        public string NewName { get; set; } = string.Empty;
+
         public SaveAsForm(ISettingNameOperation settingNameOperation)
         {
             InitializeComponent();
@@ -24,7 +27,8 @@ namespace SelectionPrint
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            m_settingNameOperation.SaveAs(newNameTextBox.Text);
+            SaveAsSuccess = m_settingNameOperation.SaveAs(newNameTextBox.Text);
+            NewName = newNameTextBox.Text;
         }
     }
 }

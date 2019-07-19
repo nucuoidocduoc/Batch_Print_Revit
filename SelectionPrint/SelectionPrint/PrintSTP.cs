@@ -102,7 +102,8 @@ namespace SelectionPrint
                 foreach (ElementId eid in printSettingIds) {
                     Element printSetting = m_commandData.Application.ActiveUIDocument.Document.GetElement(eid);
                     if (printSetting.Name.Equals(value)) {
-                        m_printMgr.PrintSetup.CurrentPrintSetting = printSetting as PrintSetting;
+                        PrintSetting printSettingg = printSetting as PrintSetting;
+                        m_printMgr.PrintSetup.CurrentPrintSetting = printSettingg;
                     }
                 }
             }

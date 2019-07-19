@@ -145,8 +145,7 @@ namespace SelectionPrint
                 }
 
                 if (saveDlg.ShowDialog() == DialogResult.OK) {
-                    return _printManager.PrintToFileName
-                        = saveDlg.FileName;
+                    return _printManager.PrintToFileName = saveDlg.FileName;
                 }
                 else {
                     return null;
@@ -164,6 +163,7 @@ namespace SelectionPrint
             {
                 _printManager.PrintRange = value;
                 _printManager.Apply();
+                _printManager = _commandData.Application.ActiveUIDocument.Document.PrintManager;
             }
         }
 

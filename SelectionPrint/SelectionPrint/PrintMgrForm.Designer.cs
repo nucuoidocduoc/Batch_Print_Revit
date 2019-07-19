@@ -54,12 +54,19 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pictureBoxCollate = new System.Windows.Forms.PictureBox();
+            this.btnPropertiesPrinter = new System.Windows.Forms.Button();
             this.printergroupBox.SuspendLayout();
             this.fileGroupBox.SuspendLayout();
             this.printRangeGroupBox.SuspendLayout();
             this.optionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.copiesNumericUpDown)).BeginInit();
             this.settingsGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCollate)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -82,6 +89,11 @@
             // 
             // printergroupBox
             // 
+            this.printergroupBox.Controls.Add(this.btnPropertiesPrinter);
+            this.printergroupBox.Controls.Add(this.label5);
+            this.printergroupBox.Controls.Add(this.label4);
+            this.printergroupBox.Controls.Add(this.label3);
+            this.printergroupBox.Controls.Add(this.label2);
             this.printergroupBox.Controls.Add(this.printToFileCheckBox);
             this.printergroupBox.Controls.Add(this.printerNameComboBox);
             this.printergroupBox.Controls.Add(this.label1);
@@ -95,7 +107,7 @@
             // printToFileCheckBox
             // 
             this.printToFileCheckBox.AutoSize = true;
-            this.printToFileCheckBox.Location = new System.Drawing.Point(435, 124);
+            this.printToFileCheckBox.Location = new System.Drawing.Point(435, 104);
             this.printToFileCheckBox.Name = "printToFileCheckBox";
             this.printToFileCheckBox.Size = new System.Drawing.Size(75, 17);
             this.printToFileCheckBox.TabIndex = 2;
@@ -121,7 +133,7 @@
             // 
             this.browseButton.Location = new System.Drawing.Point(417, 73);
             this.browseButton.Name = "browseButton";
-            this.browseButton.Size = new System.Drawing.Size(75, 23);
+            this.browseButton.Size = new System.Drawing.Size(93, 23);
             this.browseButton.TabIndex = 3;
             this.browseButton.Text = "&Browse...";
             this.browseButton.UseVisualStyleBackColor = true;
@@ -234,6 +246,7 @@
             // 
             // optionsGroupBox
             // 
+            this.optionsGroupBox.Controls.Add(this.pictureBoxCollate);
             this.optionsGroupBox.Controls.Add(this.copiesNumericUpDown);
             this.optionsGroupBox.Controls.Add(this.collateCheckBox);
             this.optionsGroupBox.Controls.Add(this.orderCheckBox);
@@ -353,6 +366,61 @@
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Status:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 71);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Type:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Where:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 124);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Comment:";
+            // 
+            // pictureBoxCollate
+            // 
+            this.pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate1;
+            this.pictureBoxCollate.Location = new System.Drawing.Point(155, 44);
+            this.pictureBoxCollate.Name = "pictureBoxCollate";
+            this.pictureBoxCollate.Size = new System.Drawing.Size(100, 50);
+            this.pictureBoxCollate.TabIndex = 5;
+            this.pictureBoxCollate.TabStop = false;
+            // 
+            // btnPropertiesPrinter
+            // 
+            this.btnPropertiesPrinter.Location = new System.Drawing.Point(417, 13);
+            this.btnPropertiesPrinter.Name = "btnPropertiesPrinter";
+            this.btnPropertiesPrinter.Size = new System.Drawing.Size(93, 23);
+            this.btnPropertiesPrinter.TabIndex = 7;
+            this.btnPropertiesPrinter.Text = "&Properties...";
+            this.btnPropertiesPrinter.UseVisualStyleBackColor = true;
+            this.btnPropertiesPrinter.Click += new System.EventHandler(this.btnPropertiesPrinter_Click);
+            // 
             // PrintMgrForm
             // 
             this.AcceptButton = this.okButton;
@@ -388,6 +456,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.copiesNumericUpDown)).EndInit();
             this.settingsGroupBox.ResumeLayout(false);
             this.settingsGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCollate)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,5 +490,11 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.NumericUpDown copiesNumericUpDown;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pictureBoxCollate;
+        private System.Windows.Forms.Button btnPropertiesPrinter;
     }
 }

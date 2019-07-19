@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,24 @@ namespace SelectionPrint
 {
     public partial class PrintMgrForm : System.Windows.Forms.Form
     {
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GlobalLock(IntPtr hMem);
+
+        [DllImport("kernel32.dll")]
+        private static extern bool GlobalUnlock(IntPtr hMem);
+
+        [DllImport("kernel32.dll")]
+        private static extern bool GlobalFree(IntPtr hMem);
+
+        [DllImport("winspool.Drv", EntryPoint = "DocumentPropertiesW", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        private static extern int DocumentProperties(IntPtr hwnd, IntPtr hPrinter, [MarshalAs(UnmanagedType.LPWStr)] string pDeviceName, IntPtr pDevModeOutput, IntPtr pDevModeInput, int fMode);
+
+        private const int DM_PROMPT = 4;
+        private const int DM_OUT_BUFFER = 2;
+        private const int DM_IN_BUFFER = 8;
+
         private PrintMgr _printMgr;
+        private System.Drawing.Printing.PrintDocument pd;
 
         public PrintMgrForm(PrintMgr printMgr)
         {
@@ -41,16 +59,16 @@ namespace SelectionPrint
         private void PrintMgrForm_Load(object sender, EventArgs e)
         {
             printerNameComboBox.DataSource = _printMgr.InstalledPrinterNames;
-
+            pd = new System.Drawing.Printing.PrintDocument();
             // set copy number
-            if (_printMgr.CopyNumber > 0) {
-                copiesNumericUpDown.Value = _printMgr.CopyNumber;
-            }
 
             // the selectedValueChange event have to add event handler after
             // data source be set, or else the delegate method will be invoked meaningless.
             this.printerNameComboBox.SelectedValueChanged += new System.EventHandler(this.printerNameComboBox_SelectedValueChanged);
             printerNameComboBox.SelectedItem = _printMgr.PrinterName;
+            if (_printMgr.CopyNumber > 0) {
+                copiesNumericUpDown.Value = _printMgr.CopyNumber;
+            }
             if (_printMgr.VerifyPrintToFile(printToFileCheckBox)) {
                 printToFileCheckBox.Checked = _printMgr.IsPrintToFile;
             }
@@ -114,6 +132,12 @@ namespace SelectionPrint
 
             if (_printMgr.VerifyCollate(collateCheckBox)) {
                 collateCheckBox.Checked = _printMgr.Collate;
+                if (collateCheckBox.Checked) {
+                    pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate2;
+                }
+                else {
+                    pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate1;
+                }
             }
             this.collateCheckBox.CheckedChanged += new System.EventHandler(this.collateCheckBox_CheckedChanged);
 
@@ -255,6 +279,12 @@ namespace SelectionPrint
         private void collateCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _printMgr.Collate = collateCheckBox.Checked;
+            if (collateCheckBox.Checked) {
+                pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate2;
+            }
+            else {
+                pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate1;
+            }
         }
 
         private void selectButton_Click(object sender, EventArgs e)
@@ -284,6 +314,32 @@ namespace SelectionPrint
             catch (Exception ex) {
                 PrintMgr.MyMessageBox("Print Failed \n" + ex.StackTrace);
             }
+        }
+
+        private void btnPropertiesPrinter_Click(object sender, EventArgs e)
+        {
+            pd.PrinterSettings.PrinterName = printerNameComboBox.SelectedItem as string;
+            if (pd.PrinterSettings.IsValid)
+                ShowPrinterProperties(pd.PrinterSettings);
+            else
+                MessageBox.Show("Invalid printer name");
+        }
+
+        private void ShowPrinterProperties(System.Drawing.Printing.PrinterSettings printerSettings)
+        {
+            IntPtr hDevMode = printerSettings.GetHdevmode(printerSettings.DefaultPageSettings);
+            IntPtr pDevMode = GlobalLock(hDevMode);
+            int sizeNeeded = DocumentProperties(this.Handle, IntPtr.Zero, printerSettings.PrinterName, pDevMode, pDevMode, 0);
+            IntPtr devModeData = Marshal.AllocHGlobal(sizeNeeded);
+            long userChoice = DocumentProperties(this.Handle, IntPtr.Zero, printerSettings.PrinterName, devModeData, pDevMode, DM_IN_BUFFER | DM_PROMPT | DM_OUT_BUFFER);
+            long IDOK = (long)DialogResult.OK;
+            if (userChoice == IDOK) {
+                printerSettings.SetHdevmode(devModeData);
+                printerSettings.DefaultPageSettings.SetHdevmode(devModeData);
+            }
+            GlobalUnlock(hDevMode);
+            GlobalFree(hDevMode);
+            Marshal.FreeHGlobal(devModeData);
         }
     }
 }

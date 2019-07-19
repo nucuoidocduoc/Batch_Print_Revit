@@ -242,7 +242,7 @@
             this.userDefinedMarginYTextBox.Name = "userDefinedMarginYTextBox";
             this.userDefinedMarginYTextBox.Size = new System.Drawing.Size(35, 20);
             this.userDefinedMarginYTextBox.TabIndex = 2;
-            this.userDefinedMarginYTextBox.Text = 0.000.ToString("0.000");
+            this.userDefinedMarginYTextBox.Text = "0.000";
             // 
             // userDefinedMarginXTextBox
             // 
@@ -250,7 +250,7 @@
             this.userDefinedMarginXTextBox.Name = "userDefinedMarginXTextBox";
             this.userDefinedMarginXTextBox.Size = new System.Drawing.Size(35, 20);
             this.userDefinedMarginXTextBox.TabIndex = 2;
-            this.userDefinedMarginXTextBox.Text = 0.000.ToString("0.000");
+            this.userDefinedMarginXTextBox.Text = "0.000";
             // 
             // marginTypeComboBox
             // 
@@ -264,7 +264,7 @@
             // offsetRadioButton
             // 
             this.offsetRadioButton.AutoSize = true;
-            this.offsetRadioButton.Location = new System.Drawing.Point(73, 19);
+            this.offsetRadioButton.Location = new System.Drawing.Point(73, 17);
             this.offsetRadioButton.Name = "offsetRadioButton";
             this.offsetRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.offsetRadioButton.Size = new System.Drawing.Size(109, 17);
@@ -529,9 +529,9 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(469, 35);
+            this.saveButton.Location = new System.Drawing.Point(451, 35);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(93, 23);
             this.saveButton.TabIndex = 3;
             this.saveButton.Text = "&Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -539,9 +539,9 @@
             // 
             // saveAsButton
             // 
-            this.saveAsButton.Location = new System.Drawing.Point(469, 64);
+            this.saveAsButton.Location = new System.Drawing.Point(451, 64);
             this.saveAsButton.Name = "saveAsButton";
-            this.saveAsButton.Size = new System.Drawing.Size(75, 23);
+            this.saveAsButton.Size = new System.Drawing.Size(93, 23);
             this.saveAsButton.TabIndex = 3;
             this.saveAsButton.Text = "Sa&veAs...";
             this.saveAsButton.UseVisualStyleBackColor = true;
@@ -550,9 +550,9 @@
             // revertButton
             // 
             this.revertButton.Enabled = false;
-            this.revertButton.Location = new System.Drawing.Point(469, 93);
+            this.revertButton.Location = new System.Drawing.Point(451, 93);
             this.revertButton.Name = "revertButton";
-            this.revertButton.Size = new System.Drawing.Size(75, 23);
+            this.revertButton.Size = new System.Drawing.Size(93, 23);
             this.revertButton.TabIndex = 3;
             this.revertButton.Text = "Rever&t";
             this.revertButton.UseVisualStyleBackColor = true;
@@ -560,9 +560,9 @@
             // 
             // renameButton
             // 
-            this.renameButton.Location = new System.Drawing.Point(469, 122);
+            this.renameButton.Location = new System.Drawing.Point(451, 122);
             this.renameButton.Name = "renameButton";
-            this.renameButton.Size = new System.Drawing.Size(75, 23);
+            this.renameButton.Size = new System.Drawing.Size(93, 23);
             this.renameButton.TabIndex = 3;
             this.renameButton.Text = "Ren&ame";
             this.renameButton.UseVisualStyleBackColor = true;
@@ -570,9 +570,9 @@
             // 
             // deleteButton
             // 
-            this.deleteButton.Location = new System.Drawing.Point(469, 151);
+            this.deleteButton.Location = new System.Drawing.Point(451, 151);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteButton.Size = new System.Drawing.Size(93, 23);
             this.deleteButton.TabIndex = 3;
             this.deleteButton.Text = "&Delete";
             this.deleteButton.UseVisualStyleBackColor = true;

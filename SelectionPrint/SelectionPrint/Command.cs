@@ -36,19 +36,19 @@ namespace SelectionPrint
         /// Cancelled can be used to signify that the user cancelled the external operation
         /// at some point. Failure should be returned if the application is unable to proceed with
         /// the operation.</returns>
-        public Autodesk.Revit.UI.Result Execute(ExternalCommandData commandData,
-        ref string message, Autodesk.Revit.DB.ElementSet elements)
+        public Result Execute(ExternalCommandData commandData,
+        ref string message, ElementSet elements)
         {
-            Autodesk.Revit.DB.Transaction newTran = null;
+            Transaction newTran = null;
             try {
-                newTran = new Autodesk.Revit.DB.Transaction(commandData.Application.ActiveUIDocument.Document, "ViewPrinter");
+                newTran = new Transaction(commandData.Application.ActiveUIDocument.Document, "ViewPrinter");
                 newTran.Start();
 
                 PrintMgr pMgr = new PrintMgr(commandData);
 
                 if (null == pMgr.InstalledPrinterNames) {
                     PrintMgr.MyMessageBox("No installed printer, the external command can't work.");
-                    return Autodesk.Revit.UI.Result.Cancelled;
+                    return Result.Cancelled;
                 }
 
                 using (PrintMgrForm pmDlg = new PrintMgrForm(pMgr)) {
@@ -63,10 +63,10 @@ namespace SelectionPrint
                 if (null != newTran)
                     newTran.RollBack();
                 message = ex.ToString();
-                return Autodesk.Revit.UI.Result.Failed;
+                return Result.Failed;
             }
 
-            return Autodesk.Revit.UI.Result.Cancelled;
+            return Result.Cancelled;
         }
     }
 }

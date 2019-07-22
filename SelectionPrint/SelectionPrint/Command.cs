@@ -45,7 +45,6 @@ namespace SelectionPrint
                 newTran.Start();
 
                 PrintMgr pMgr = new PrintMgr(commandData);
-
                 if (null == pMgr.InstalledPrinterNames) {
                     PrintMgr.MyMessageBox("No installed printer, the external command can't work.");
                     return Result.Cancelled;

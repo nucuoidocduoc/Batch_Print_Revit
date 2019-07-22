@@ -48,6 +48,9 @@ namespace SelectionPrint
         /// for InSessionPrintSetting and InSessionViewSheetSet data
         /// </summary>
         public const string InSessionName = "<In-Session>";
+
+        public const string MessageNewSession = "Do you want save these setting for use in a future Revit session?";
+        public const string MessageDuplicateName = "The name you supplied is already in use. Enter a unique name.";
     }
 
     /// <summary>
@@ -77,6 +80,7 @@ namespace SelectionPrint
             {
                 if (value == ConstData.InSessionName) {
                     m_viewSheetSetting.CurrentViewSheetSet = m_viewSheetSetting.InSession;
+                    //m_viewSheetSetting.Save();
                     return;
                 }
                 FilteredElementCollector filteredElementCollector = new FilteredElementCollector(m_doc);
@@ -198,7 +202,7 @@ namespace SelectionPrint
 
         public bool IsSelected(string viewName)
         {
-            foreach (Autodesk.Revit.DB.View view in m_viewSheetSetting.CurrentViewSheetSet.Views) {
+            foreach (View view in m_viewSheetSetting.CurrentViewSheetSet.Views) {
                 if (viewName.Equals(view.ViewType.ToString() + ": " + view.Name)) {
                     return true;
                 }
@@ -222,6 +226,43 @@ namespace SelectionPrint
             IViewSheetSet viewSheetSet = m_viewSheetSetting.CurrentViewSheetSet;
             viewSheetSet.Views = selectedViews;
             Save();
+        }
+
+        public void ChangeInSessionViewSheetSet(List<string> names)
+        {
+            ViewSet selectedViews = new ViewSet();
+
+            if (null != names && 0 < names.Count) {
+                foreach (Autodesk.Revit.DB.View view in m_viewSheetSetting.AvailableViews) {
+                    if (names.Contains(view.ViewType.ToString() + ": " + view.Name)) {
+                        selectedViews.Insert(view);
+                    }
+                }
+            }
+
+            InSessionViewSheetSet inSessionViewSheetSet = m_viewSheetSetting.InSession;
+            inSessionViewSheetSet.Views = selectedViews;
+            Save();
+        }
+
+        public bool WasSavedViewSheetSet(List<string> names)
+        {
+            if (names.Count != m_viewSheetSetting.CurrentViewSheetSet.Views.Size) {
+                return false;
+            }
+
+            foreach (string viewName in names) {
+                bool hasView = false;
+                foreach (View view in m_viewSheetSetting.CurrentViewSheetSet.Views) {
+                    if (viewName.Equals(view.ViewType.ToString() + ": " + view.Name)) {
+                        hasView = true;
+                    }
+                }
+                if (!hasView) {
+                    return hasView;
+                }
+            }
+            return true;
         }
     }
 }

@@ -40,8 +40,8 @@
             this.checkAllButton = new System.Windows.Forms.Button();
             this.checkNoneButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
             this.viewSheetSetListView = new System.Windows.Forms.ListView();
+            this.btnOk = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,16 +182,6 @@
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // okButton
-            // 
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(344, 370);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 6;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
-            // 
             // viewSheetSetListView
             // 
             this.viewSheetSetListView.CheckBoxes = true;
@@ -203,15 +193,24 @@
             this.viewSheetSetListView.UseCompatibleStateImageBehavior = false;
             this.viewSheetSetListView.View = System.Windows.Forms.View.List;
             // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(344, 370);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.TabIndex = 8;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.OkButton_Click);
+            // 
             // viewSheetSetForm
             // 
-            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(512, 405);
+            this.Controls.Add(this.btnOk);
             this.Controls.Add(this.viewSheetSetListView);
-            this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.checkNoneButton);
             this.Controls.Add(this.checkAllButton);
@@ -253,7 +252,7 @@
         private System.Windows.Forms.CheckBox showViewsCheckBox;
         private System.Windows.Forms.CheckBox showSheetsCheckBox;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.ListView viewSheetSetListView;
+        private System.Windows.Forms.Button btnOk;
     }
 }

@@ -41,9 +41,12 @@ namespace SelectionPrint
 
             if (m_printSetup.PageOrientation == PageOrientationType.Landscape) {
                 landscapeRadioButton.Checked = true;
+
+                //pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate2;
             }
             else {
                 portraitRadioButton.Checked = true;
+                //pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources;
             }
             this.landscapeRadioButton.CheckedChanged += new System.EventHandler(this.landscapeRadioButton_CheckedChanged);
             this.portraitRadioButton.CheckedChanged += new System.EventHandler(this.portraitRadioButton_CheckedChanged);
@@ -437,7 +440,7 @@ namespace SelectionPrint
         {
             bool isSuccess = false;
             string newName = string.Empty;
-            using (SaveAsForm dlg = new SaveAsForm(m_printSetup)) {
+            using (SaveAsForm dlg = new SaveAsForm(m_printSetup, m_printSetup.PrintSettingNames)) {
                 dlg.ShowDialog();
                 isSuccess = dlg.SaveAsSuccess;
                 newName = dlg.NewName;
@@ -449,13 +452,14 @@ namespace SelectionPrint
             m_stopUpdateFlag = false;
             if (isSuccess) {
                 printSetupsComboBox.SelectedItem = newName;
+                m_printSetup.SettingName = newName;
             }
             //printSetupsComboBox.SelectedItem = m_printSetup.SettingName;
         }
 
         private void renameButton_Click(object sender, EventArgs e)
         {
-            using (ReNameForm dlg = new ReNameForm(m_printSetup)) {
+            using (ReNameForm dlg = new ReNameForm(m_printSetup, m_printSetup.PrintSettingNames)) {
                 dlg.ShowDialog();
             }
 
@@ -482,8 +486,8 @@ namespace SelectionPrint
             printSetupsComboBox.DataSource = m_printSetup.PrintSettingNames;
             printSetupsComboBox.Update();
             m_stopUpdateFlag = false;
-
-            printSetupsComboBox.SelectedItem = "<In-Session>";
+            m_printSetup.SettingName = ConstData.InSessionName;
+            printSetupsComboBox_SelectedValueChanged(null, null);
         }
     }
 }

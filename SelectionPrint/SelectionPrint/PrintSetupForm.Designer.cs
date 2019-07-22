@@ -74,6 +74,7 @@
             this.revertButton = new System.Windows.Forms.Button();
             this.renameButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,6 +83,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.zoomPercentNumericUpDown)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -171,6 +173,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.pictureBox1);
             this.groupBox2.Controls.Add(this.landscapeRadioButton);
             this.groupBox2.Controls.Add(this.portraitRadioButton);
             this.groupBox2.Location = new System.Drawing.Point(221, 75);
@@ -578,6 +581,14 @@
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(11, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(71, 47);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // PrintSetupForm
             // 
             this.AcceptButton = this.okButton;
@@ -626,6 +637,7 @@
             this.groupBox6.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -680,5 +692,6 @@
         private System.Windows.Forms.CheckBox hideRefWorkPlanesCheckBox;
         private System.Windows.Forms.CheckBox ViewLinksInBlueCheckBox;
         private System.Windows.Forms.NumericUpDown zoomPercentNumericUpDown;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

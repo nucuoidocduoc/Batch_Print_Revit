@@ -25,13 +25,13 @@ namespace SelectionPrint
         private void ViewSheetSetForm_Load(object sender, EventArgs e)
         {
             viewSheetSetNameComboBox.DataSource = m_viewSheets.ViewSheetSetNames;
-            this.viewSheetSetNameComboBox.SelectedValueChanged += new System.EventHandler(this.viewSheetSetNameComboBox_SelectedValueChanged);
+            viewSheetSetNameComboBox.SelectedValueChanged += viewSheetSetNameComboBox_SelectedValueChanged;
             viewSheetSetNameComboBox.SelectedItem = m_viewSheets.SettingName;
 
             showSheetsCheckBox.Checked = true;
             showViewsCheckBox.Checked = true;
             ListViewSheetSet();
-            this.viewSheetSetListView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.viewSheetSetListView_ItemChecked);
+            viewSheetSetListView.ItemChecked += viewSheetSetListView_ItemChecked;
         }
 
         private void ListViewSheetSet()
@@ -69,8 +69,7 @@ namespace SelectionPrint
 
             saveButton.Enabled = revertButton.Enabled = false;
 
-            reNameButton.Enabled = deleteButton.Enabled =
-                m_viewSheets.SettingName.Equals("<In-Session>") ? false : true;
+            reNameButton.Enabled = deleteButton.Enabled = !m_viewSheets.SettingName.Equals("<In-Session>");
         }
 
         private void showSheetsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -99,7 +98,7 @@ namespace SelectionPrint
 
         private void saveAsButton_Click(object sender, EventArgs e)
         {
-            using (SaveAsForm dlg = new SaveAsForm(m_viewSheets)) {
+            using (SaveAsForm dlg = new SaveAsForm(m_viewSheets, m_viewSheets.ViewSheetSetNames)) {
                 dlg.ShowDialog();
             }
 
@@ -119,7 +118,7 @@ namespace SelectionPrint
 
         private void reNameButton_Click(object sender, EventArgs e)
         {
-            using (ReNameForm dlg = new ReNameForm(m_viewSheets)) {
+            using (ReNameForm dlg = new ReNameForm(m_viewSheets, m_viewSheets.ViewSheetSetNames)) {
                 dlg.ShowDialog();
             }
 
@@ -163,6 +162,38 @@ namespace SelectionPrint
                 && !saveButton.Enabled) {
                 saveButton.Enabled = revertButton.Enabled
                     = reNameButton.Enabled = true;
+            }
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            List<string> names = new List<string>();
+            foreach (ListViewItem item in viewSheetSetListView.Items) {
+                if (item.Checked) {
+                    names.Add(item.Text);
+                }
+            }
+            string nameCurrentViewSheetSet = viewSheetSetNameComboBox.SelectedItem as string;
+            if (!nameCurrentViewSheetSet.Equals("<In-Session>")) {
+                if (!m_viewSheets.WasSavedViewSheetSet(names)) {
+                    m_viewSheets.SettingName = "<In-Session>";
+                    m_viewSheets.ChangeInSessionViewSheetSet(names);
+                    m_viewSheets.Save();
+                }
+                this.Close();
+            }
+            else {
+                if (!m_viewSheets.WasSavedViewSheetSet(names)) {
+                    DialogResult dialogResult = MessageBox.Show(ConstData.MessageNewSession, "Save Settings", MessageBoxButtons.YesNoCancel);
+                    if (dialogResult == DialogResult.Yes) {
+                        saveAsButton_Click(null, null);
+                        this.Close();
+                    }
+                    else if (dialogResult == DialogResult.No) {
+                        m_viewSheets.ChangeInSessionViewSheetSet(names);
+                        this.Close();
+                    }
+                }
             }
         }
     }

@@ -104,12 +104,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReNameForm.resx">
+      <DependentUpon>ReNameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveAsForm.resx">
+      <DependentUpon>SaveAsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSheetSetForm.resx">
+      <DependentUpon>ViewSheetSetForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Collate1.PNG" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Collate2.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Landscape.PNG" />
+    <Content Include="Resources\Portrait.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

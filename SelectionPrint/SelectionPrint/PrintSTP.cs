@@ -48,7 +48,10 @@ namespace SelectionPrint
         public bool SaveAs(string newName)
         {
             try {
-                return m_printMgr.PrintSetup.SaveAs(newName);
+                bool isSuccess = false;
+                isSuccess = m_printMgr.PrintSetup.SaveAs(newName);
+                //m_printMgr.Apply();
+                return isSuccess;
             }
             catch (Exception ex) {
                 PrintMgr.MyMessageBox(ex.Message);
@@ -73,9 +76,9 @@ namespace SelectionPrint
             {
                 List<string> names = new List<string>();
                 //foreach (Element printSetting in m_commandData.Application.ActiveUIDocument.Document.PrintSettings)
-                ICollection<ElementId> printSettingIds = m_commandData.Application.ActiveUIDocument.Document.GetPrintSettingIds();
-                foreach (ElementId eid in printSettingIds) {
+                foreach (ElementId eid in m_commandData.Application.ActiveUIDocument.Document.GetPrintSettingIds()) {
                     Element printSetting = m_commandData.Application.ActiveUIDocument.Document.GetElement(eid);
+
                     names.Add(printSetting.Name);
                 }
                 names.Add(ConstData.InSessionName);
@@ -98,12 +101,10 @@ namespace SelectionPrint
                     return;
                 }
                 //foreach (Element printSetting in m_commandData.Application.ActiveUIDocument.Document.PrintSettings)
-                ICollection<ElementId> printSettingIds = m_commandData.Application.ActiveUIDocument.Document.GetPrintSettingIds();
-                foreach (ElementId eid in printSettingIds) {
+                foreach (ElementId eid in m_commandData.Application.ActiveUIDocument.Document.GetPrintSettingIds()) {
                     Element printSetting = m_commandData.Application.ActiveUIDocument.Document.GetElement(eid);
                     if (printSetting.Name.Equals(value)) {
-                        PrintSetting printSettingg = printSetting as PrintSetting;
-                        m_printMgr.PrintSetup.CurrentPrintSetting = printSettingg;
+                        m_printMgr.PrintSetup.CurrentPrintSetting = printSetting as PrintSetting;
                     }
                 }
             }

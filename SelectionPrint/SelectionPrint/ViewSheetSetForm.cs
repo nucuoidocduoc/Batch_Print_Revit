@@ -191,8 +191,12 @@ namespace SelectionPrint
                     }
                     else if (dialogResult == DialogResult.No) {
                         m_viewSheets.ChangeInSessionViewSheetSet(names);
+                        m_viewSheets.SettingName = "<In-Session>";
                         this.Close();
                     }
+                }
+                else {
+                    this.Close();
                 }
             }
         }

@@ -118,8 +118,9 @@ namespace SelectionPrint
             this.visiblePortionRadioButton.CheckedChanged += new System.EventHandler(this.visiblePortionRadioButton_CheckedChanged);
             this.selectedViewsRadioButton.CheckedChanged += new System.EventHandler(this.selectedViewsRadioButton_CheckedChanged);
 
-            this.printToFileNameTextBox.Text = Environment.GetFolderPath(
-                Environment.SpecialFolder.MyDocuments) + "\\" + _printMgr.DocumentTitle;
+            //this.printToFileNameTextBox.Text = Environment.GetFolderPath(
+            //    Environment.SpecialFolder.MyDocuments) + "\\" + _printMgr.DocumentTitle;
+            this.printToFileNameTextBox.Text = _printMgr.PrintToFileName;
             controlsToEnableOrNot.Clear();
             controlsToEnableOrNot.Add(selectedViewSheetSetLabel);
             controlsToEnableOrNot.Add(selectedViewSheetSetButton);
@@ -166,7 +167,7 @@ namespace SelectionPrint
                 printToFileNameTextBox.Text = printToFileNameTextBox.Text.Remove(
                     printToFileNameTextBox.Text.LastIndexOf(".")) + _printMgr.PostFix;
             }
-
+            this.printToFileNameTextBox.Text = _printMgr.PrintToFileName;
             _printMgr.VerifyPrintToFileName(controlsToEnableOrNot);
 
             _printMgr.VerifyPrintToSingleFile(singleFileRadioButton);

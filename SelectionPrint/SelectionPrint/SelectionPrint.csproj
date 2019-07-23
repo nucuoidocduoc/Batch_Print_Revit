@@ -122,6 +122,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Landscape.PNG" />
+    <None Include="Resources\Portrait1.PNG" />
+    <None Include="Resources\Landscape1.PNG" />
     <Content Include="Resources\Portrait.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

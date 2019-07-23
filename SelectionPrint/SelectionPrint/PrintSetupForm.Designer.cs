@@ -226,18 +226,18 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(176, 72);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 13);
+            this.label6.Size = new System.Drawing.Size(21, 13);
             this.label6.TabIndex = 3;
-            this.label6.Text = "=y";
+            this.label6.Text = "= y";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(114, 72);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 13);
+            this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 3;
-            this.label5.Text = "=x";
+            this.label5.Text = "= x";
             // 
             // userDefinedMarginYTextBox
             // 
@@ -267,7 +267,7 @@
             // offsetRadioButton
             // 
             this.offsetRadioButton.AutoSize = true;
-            this.offsetRadioButton.Location = new System.Drawing.Point(73, 17);
+            this.offsetRadioButton.Location = new System.Drawing.Point(73, 19);
             this.offsetRadioButton.Name = "offsetRadioButton";
             this.offsetRadioButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.offsetRadioButton.Size = new System.Drawing.Size(109, 17);
@@ -583,9 +583,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(11, 19);
+            this.pictureBox1.Image = global::SelectionPrint.Properties.Resources.Portrait;
+            this.pictureBox1.Location = new System.Drawing.Point(28, 19);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(71, 47);
+            this.pictureBox1.Size = new System.Drawing.Size(46, 47);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 

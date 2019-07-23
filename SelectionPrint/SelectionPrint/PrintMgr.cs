@@ -145,7 +145,9 @@ namespace SelectionPrint
                 }
 
                 if (saveDlg.ShowDialog() == DialogResult.OK) {
-                    return _printManager.PrintToFileName = saveDlg.FileName;
+                    _printManager.PrintToFileName = saveDlg.FileName;
+                    _printManager.Apply();
+                    return _printManager.PrintToFileName;
                 }
                 else {
                     return null;

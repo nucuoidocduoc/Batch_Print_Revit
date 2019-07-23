@@ -42,11 +42,11 @@ namespace SelectionPrint
             if (m_printSetup.PageOrientation == PageOrientationType.Landscape) {
                 landscapeRadioButton.Checked = true;
 
-                //pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources.Collate2;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Landscape;
             }
             else {
                 portraitRadioButton.Checked = true;
-                //pictureBoxCollate.Image = global::SelectionPrint.Properties.Resources;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Portrait;
             }
             this.landscapeRadioButton.CheckedChanged += new System.EventHandler(this.landscapeRadioButton_CheckedChanged);
             this.portraitRadioButton.CheckedChanged += new System.EventHandler(this.portraitRadioButton_CheckedChanged);
@@ -130,9 +130,11 @@ namespace SelectionPrint
             paperSourceComboBox.SelectedItem = m_printSetup.PaperSource;
             if (m_printSetup.PageOrientation == PageOrientationType.Landscape) {
                 landscapeRadioButton.Checked = true;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Landscape;
             }
             else {
                 portraitRadioButton.Checked = true;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Portrait;
             }
             if (m_printSetup.PaperPlacement == PaperPlacementType.Center) {
                 centerRadioButton.Checked = true;
@@ -197,6 +199,7 @@ namespace SelectionPrint
         {
             if (portraitRadioButton.Checked) {
                 m_printSetup.PageOrientation = PageOrientationType.Portrait;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Portrait;
             }
 
             if (!revertButton.Enabled) {
@@ -208,6 +211,7 @@ namespace SelectionPrint
         {
             if (landscapeRadioButton.Checked) {
                 m_printSetup.PageOrientation = PageOrientationType.Landscape;
+                pictureBox1.Image = global::SelectionPrint.Properties.Resources.Landscape;
             }
 
             if (!revertButton.Enabled) {
